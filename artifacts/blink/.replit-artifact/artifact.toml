@@ -1,0 +1,24 @@
+kind = "mobile"
+previewPath = "/"
+title = "Blink"
+description = "A mobile-first hyperlocal social discovery app that helps people discover nearby people, live meetups, events, communities, places, and things to do right now."
+version = "1.0.0"
+id = "artifacts/blink"
+router = "expo-domain"
+
+[[services]]
+name = "expo"
+ensurePreviewReachable = "/status"
+paths = [ "/" ]
+localPort = 23811
+
+[services.development]
+run = "pnpm --filter @workspace/blink run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/blink", "run", "build" ]
+run = [ "pnpm", "--filter", "@workspace/blink", "run", "serve" ]
+
+[services.env]
+PORT = "23811"
+BASE_PATH = "/"

@@ -1,0 +1,130 @@
+Build a mobile-first social discovery app called “Blink”.
+
+Blink is a hyperlocal social app where people discover what is happening around them right now — nearby people, live meetups, communities, events, interesting places, and things to do.
+
+Core experience:
+
+1. DISCOVER
+Create a Discover screen with personalized discovery modes:
+- For You
+- Foodie
+- Fitness
+- Geeks
+- Adventure
+- Entertainment
+- Explore
+- Hidden Gems
+
+These modes should NOT hard-filter the content. They should change the ranking/prioritization. Matching people, meetups and places should move toward the top, while non-matching content remains visible below.
+
+Discover should have separate sections such as:
+- People Nearby
+- Happening Now
+- Upcoming Events
+- Nearby Places
+- Collections
+- Explore Your City
+
+2. MAP
+Create a live map centered around the user's location.
+
+Map filters are different from Discover filters and should focus on social activity:
+- Live Now
+- Meetups
+- Events
+- Communities
+- Places For You
+- Nearby
+
+Live Now means actual social activity/meetups/events — ordinary restaurants or cafes should NOT appear simply because they have people nearby.
+
+Map markers should visually prioritize relevant/active items while keeping other items visible.
+
+3. PEOPLE
+Users have profiles containing:
+- Name
+- Photo
+- Bio
+- Interests (up to 10)
+- Current mood
+- Current intent
+- Approximate location
+- Activity/availability
+
+Current mood and interests should influence discovery ranking. For example, someone currently in a coding/work mood should be prioritized in Geeks, while someone interested in technology should also receive relevance even if their current mood differs.
+
+4. MEETUPS
+Users can create spontaneous flash meetups around their location.
+
+Meetups should support:
+- Title
+- Description
+- Location
+- Intent
+- Participants
+- Host
+- Time/status
+- Live/active state
+
+Meetups should generally receive higher social priority than ordinary places when relevant.
+
+5. PLACES
+Show nearby cafes, restaurants, parks, gyms, coworking spaces, entertainment venues, etc.
+
+Places should be ranked using a combination of:
+- Distance
+- User interests
+- Current mood
+- Discovery mode
+- Rating
+- Social activity
+- Active users/check-ins
+- Meetups
+- Time/context
+
+6. COLLECTIONS + EXPLORE YOUR CITY
+Create dynamic sections such as:
+- Coffees under ₹300
+- Best views nearby
+- Study-friendly places
+- Photography walks
+- Hidden local spots
+- Weekend brunch
+- Nature
+- Parks
+- Food
+- Shopping
+- Nightlife
+- Adventure
+- History
+- Events
+- Wellness
+
+These should use place category/type information plus names, descriptions, ratings, price, attributes and semantic classification rather than relying only on simple category matching.
+
+7. RANKING PRINCIPLE
+The most important product rule:
+
+NEVER remove something just because it doesn't match a filter.
+
+Filters are relevance/ranking controls, not restrictive filters.
+
+Example:
+If the user selects “Geeks”, technology-related people, meetups and places appear first, but foodies, parks, restaurants and other people remain visible lower in the results.
+
+Do not show users numerical recommendation scores. The UI should simply change the ordering.
+
+8. UI
+Make the interface modern, clean and visually focused on nearby activity.
+
+Prioritize:
+- Map
+- People
+- Live meetups
+- Discovery cards
+- Places
+- Collections
+
+Use smooth but subtle interactions. Do not expose internal ranking/scoring systems.
+
+Build a functional prototype with realistic mock data and working navigation/interactions. Keep the architecture clean so a real backend/database and location services can later replace the mock data.

@@ -1,0 +1,1 @@
+- [Expo map constraint](expo-map-constraint.md) — the native map package was unavailable during the first Blink build, so location-aware discovery uses a dependency-free map surface.
