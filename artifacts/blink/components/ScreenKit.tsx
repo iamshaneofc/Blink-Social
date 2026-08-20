@@ -49,8 +49,6 @@ export function PhotoHero({ image, accent, children }: { image?: any; accent: st
   return <View style={[styles.photoHero, { backgroundColor: accent }]}>{image ? <Image source={image} style={StyleSheet.absoluteFillObject} resizeMode="cover" /> : <View style={[styles.heroOrb, { backgroundColor: colors.card }]} />}{children}</View>;
 }
 
-export const kitStyles = styles;
-
 const styles = StyleSheet.create({
   screen: { flex: 1 },
   content: { paddingHorizontal: 20 },
