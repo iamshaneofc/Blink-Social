@@ -1,0 +1,69 @@
+Role: Lead React Native / Expo Frontend Architect & UI Designer.
+
+Task: Expand our `@workspace/blink` app inside the monorepo from 4 mock screens to 10 complete, state-of-the-art screens, retaining the exact high-end aesthetic, soft pastel palette tokens, typography, and micro-interactions of `BlinkUI.tsx`.
+
+### Design Rules & Visual Language (Must Preserve)
+1. Typography & Spacing: Use Google Inter font (`Inter_700Bold`, `Inter_600SemiBold`, `Inter_400Regular`), 18-22px corner radius, clean 14px horizontal padding.
+2. Color Palette: Use soft pastel accent tokens (`#f2b5a4`, `#b7d7d0`, `#f4d58b`, `#b6c7e8`, `#bfd9c4`, `#f5bd9e`).
+3. Micro-interactions: Incorporate `expo-haptics` (`selectionAsync`, `impactAsync`) on all button taps and card actions.
+4. Header Style: Keep the subtle top status eyebrow (e.g. `BENGALURU · 6:42 PM`).
+
+---
+
+### The 10 Screens to Implement in Expo Router (`artifacts/blink/app/`)
+
+#### 1. Discover / Home (`app/(tabs)/index.tsx` - Enhanced)
+- Mode switcher pill bar (`For You`, `Foodie`, `Fitness`, `Geeks`, `Adventure`, `Hidden Gems`).
+- Search input with clear button.
+- Horizontal cards: "People Nearby", "Happening Now" (live badge), "Nearby Places", "Curated Collections", and "Explore City Categories".
+
+#### 2. Interactive Social Map (`app/(tabs)/map.tsx` - Enhanced)
+- Filter chips (`Live Now`, `Meetups`, `Events`, `Communities`, `Places`, `Nearby`).
+- Interactive MapView with custom marker pins showing user initials, venue icons, and pulsing live meetup rings.
+- Floating bottom sheet card showing selected pin details with "Navigate" & "Join" actions.
+
+#### 3. Meetups & Events Hub (`app/(tabs)/meetups.tsx` - Enhanced)
+- Segmented control: `Live Now` vs `Upcoming` vs `My Plans`.
+- "Host a Flash Meetup" banner card with instant creation modal trigger.
+- Rich meetup cards with host avatar, countdown timer, attendee avatar stack (`+4 others`), category tag, and quick Join button.
+
+#### 4. Profile & Intent Settings (`app/(tabs)/profile.tsx` - Enhanced)
+- User avatar with active status ring & "Looking for coffee" mood selector badge.
+- Stats grid: `24 Meetups`, `8 Communities`, `142 Connections`.
+- Interest tags cloud, saved places shelf, and Privacy & Trust setting toggles.
+
+#### 5. Flash Meetup Detail (`app/meetup/[id].tsx` - NEW)
+- Large hero cover image with live status pulse badge (`LIVE NOW`).
+- Host preview card with bio & verified badge.
+- Event description, exact location map snippet, attendee avatar list.
+- Action buttons: "Join Meetup", "Share Link", and "Open Group Chat".
+
+#### 6. Place / Venue Detail (`app/place/[id].tsx` - NEW)
+- Venue header with rating (`4.7 ★`), category (`Cafe · Coworking`), and live crowd meter (`8 Blinkers here now`).
+- Tags cloud (`Wi-Fi`, `Quiet corners`, `Great coffee`).
+- "Active Meetups Here" horizontal list and "Check In / Save Place" action buttons.
+
+#### 7. Community Hub & Sub-groups (`app/community/[id].tsx` - NEW)
+- Community banner image, member count (`1.2k members`), and description.
+- Channels tab bar (`#general`, `#announcements`, `#weekend-plans`).
+- Member roster list and "Create Group Event" button.
+
+#### 8. Inbox & Real-time Chat (`app/inbox.tsx` & `app/chat/[id].tsx` - NEW)
+- Direct Messages vs Meetup Group Chats toggle.
+- Message list with unread counter badges, last active timestamp, and typing status.
+- Chat room screen with message bubbles, photo attachment button, and location share pill.
+
+#### 9. Live Voice / Virtual Room (`app/room/[id].tsx` - NEW)
+- Virtual stage layout: Speaker avatars with glowing active rings & listener avatar grid.
+- Controls bar: Mic mute toggle, Hand raise button, Speaker reaction emojis, and Leave room button.
+
+#### 10. Story / City Moments (`app/stories.tsx` - NEW)
+- Fullscreen vertical photo story viewer with progress bars at the top.
+- Location tag sticker overlay, creator avatar, reaction tray (`❤️`, `🔥`, `👏`), and reply input box.
+
+---
+
+### Data & State Requirements
+- Extend `artifacts/blink/data/mockData.ts` with complete mock datasets for places, communities, chat threads, voice rooms, and stories.
+- Add smooth navigation routing using `expo-router` (`router.push('/meetup/rooftop')`, `router.push('/place/paper-boat')`, etc.).
+- Ensure all screens compile cleanly without TypeScript errors (`pnpm run typecheck`).

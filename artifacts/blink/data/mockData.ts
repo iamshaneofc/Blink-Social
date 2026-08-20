@@ -59,3 +59,174 @@ export const mapFilters = [
   { id: 'places', label: 'Places For You', icon: 'heart' },
   { id: 'nearby', label: 'Nearby', icon: 'navigation' },
 ];
+
+export type Community = {
+  id: string;
+  name: string;
+  description: string;
+  members: string;
+  category: string;
+  accent: string;
+  channels: string[];
+  memberInitials: string[];
+};
+
+export type ChatMessage = {
+  id: string;
+  sender: string;
+  initials: string;
+  text: string;
+  time: string;
+  mine?: boolean;
+};
+
+export type ChatThread = {
+  id: string;
+  title: string;
+  subtitle: string;
+  initials: string[];
+  unread: number;
+  active: string;
+  typing?: boolean;
+  messages: ChatMessage[];
+};
+
+export type VoiceRoom = {
+  id: string;
+  title: string;
+  topic: string;
+  speakers: { name: string; initials: string; accent: string; active?: boolean }[];
+  listeners: string[];
+  listenerCount: number;
+};
+
+export type Story = {
+  id: string;
+  creator: string;
+  initials: string;
+  location: string;
+  title: string;
+  caption: string;
+  accent: string;
+  image?: ImageSourcePropType;
+};
+
+export const communities: Community[] = [
+  {
+    id: 'indiranagar-makers',
+    name: 'Indiranagar Makers',
+    description: 'A generous corner of the city for builders, designers, tinkerers, and people who like making useful things together.',
+    members: '1.2k members',
+    category: 'Build · Learn · Share',
+    accent: '#b6c7e8',
+    channels: ['#general', '#announcements', '#weekend-plans'],
+    memberInitials: ['AR', 'KP', 'RM', 'MK', 'DI'],
+  },
+  {
+    id: 'slow-bangalore',
+    name: 'Slow Bangalore',
+    description: 'Finding quieter corners, long walks, and small rituals that make the city feel more human.',
+    members: '860 members',
+    category: 'Nature · Culture · Wellbeing',
+    accent: '#bfd9c4',
+    channels: ['#general', '#quiet-spots', '#weekend-plans'],
+    memberInitials: ['NS', 'AR', 'DI', 'SK', 'TJ'],
+  },
+];
+
+export const chatThreads: ChatThread[] = [
+  {
+    id: 'rooftop-chat',
+    title: 'Sunset rooftop hangs',
+    subtitle: 'The Terrace · 12 people',
+    initials: ['MS', 'AR', 'RM'],
+    unread: 3,
+    active: 'active now',
+    typing: true,
+    messages: [
+      { id: 'm1', sender: 'Maya S.', initials: 'MS', text: 'The lift is working again — we are on the top floor.', time: '6:18 PM' },
+      { id: 'm2', sender: 'You', initials: 'AR', text: 'Perfect. Bringing the card game.', time: '6:19 PM', mine: true },
+      { id: 'm3', sender: 'Rohan M.', initials: 'RM', text: 'I have a speaker and two extra seats.', time: '6:21 PM' },
+    ],
+  },
+  {
+    id: 'anika-rohan',
+    title: 'Rohan Mehta',
+    subtitle: 'Looking for a crew · 480 m away',
+    initials: ['RM'],
+    unread: 1,
+    active: 'active 4m ago',
+    messages: [
+      { id: 'm4', sender: 'Rohan M.', initials: 'RM', text: 'Still up for that easy run around Cubbon this weekend?', time: '4:02 PM' },
+    ],
+  },
+  {
+    id: 'makers-chat',
+    title: 'Indiranagar Makers',
+    subtitle: '#weekend-plans · 1.2k members',
+    initials: ['KP', 'DI', 'MK'],
+    unread: 0,
+    active: '8 active now',
+    messages: [
+      { id: 'm5', sender: 'Karan P.', initials: 'KP', text: 'Anyone keen on a tiny show-and-tell on Sunday?', time: 'Yesterday' },
+    ],
+  },
+];
+
+export const voiceRooms: VoiceRoom[] = [
+  {
+    id: 'city-notes',
+    title: 'City notes: what are you noticing?',
+    topic: 'An open room for small observations from Bengaluru.',
+    speakers: [
+      { name: 'Maya S.', initials: 'MS', accent: '#f2b5a4', active: true },
+      { name: 'Karan P.', initials: 'KP', accent: '#b6c7e8', active: true },
+      { name: 'Nisha J.', initials: 'NJ', accent: '#f4d58b' },
+    ],
+    listeners: ['AR', 'RM', 'DI', 'MK', 'SK', 'TJ'],
+    listenerCount: 38,
+  },
+  {
+    id: 'coffee-corner',
+    title: 'Coffee corner',
+    topic: 'A soft landing for anyone working from cafes today.',
+    speakers: [
+      { name: 'Anika R.', initials: 'AR', accent: '#f2b5a4', active: true },
+      { name: 'Dev I.', initials: 'DI', accent: '#b6c7e8' },
+    ],
+    listeners: ['RM', 'MK', 'NS'],
+    listenerCount: 16,
+  },
+];
+
+export const stories: Story[] = [
+  {
+    id: 'story-rooftop',
+    creator: 'Maya S.',
+    initials: 'MS',
+    location: 'The Terrace · Indiranagar',
+    title: 'Golden hour found us',
+    caption: 'There is still room for one more playlist opinion.',
+    accent: '#f5bd9e',
+    image: require('../assets/images/blink-rooftop.jpg'),
+  },
+  {
+    id: 'story-cafe',
+    creator: 'Anika Rao',
+    initials: 'AR',
+    location: 'Paper Boat Cafe',
+    title: 'A quiet corner',
+    caption: 'The kind of afternoon that makes a city feel small.',
+    accent: '#b7d7d0',
+    image: require('../assets/images/blink-hidden-cafe.jpg'),
+  },
+  {
+    id: 'story-walk',
+    creator: 'Dev Iyer',
+    initials: 'DI',
+    location: 'Church Street',
+    title: 'Look up',
+    caption: 'Old facades, new light, same city.',
+    accent: '#b6c7e8',
+  },
+];

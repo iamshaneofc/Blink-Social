@@ -2,6 +2,7 @@ import { Feather, Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import React, { useMemo, useState } from 'react';
 import { Alert, FlatList, Platform, Pressable, RefreshControl, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { router } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Brand, Chip, IconButton, Label, MeetupCard, PersonCard, PlaceCard, Section } from '@/components/BlinkUI';
 import { useBlink } from '@/context/BlinkContext';
@@ -40,7 +41,7 @@ export default function DiscoverScreen() {
           <View>
             <View style={styles.header}>
               <View><Text style={[styles.eyebrow, { color: colors.primary }]}>BENGALURU · 6:42 PM</Text><Brand /></View>
-              <IconButton icon="person-outline" label="Open profile" onPress={() => notify('Your profile is one tap away in the You tab.')} />
+              <View style={styles.headerActions}><IconButton icon="chatbubble-ellipses-outline" label="Open inbox" onPress={() => router.push('/inbox')} /><IconButton icon="person-outline" label="Open profile" onPress={() => notify('Your profile is one tap away in the You tab.')} /></View>
             </View>
             <View style={[styles.search, { backgroundColor: colors.card, borderColor: colors.border }]}>
               <Ionicons name="search" size={18} color={colors.mutedForeground} />
@@ -62,19 +63,19 @@ export default function DiscoverScreen() {
             <View style={styles.section}>
               <Section title="Happening now" action="Open map" onAction={() => notify('The Map tab shows live activity around you.')} />
               <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                {sortedMeetups.filter((item) => item.isLive && matches(`${item.title} ${item.location}`)).map((item) => <MeetupCard key={item.id} item={item} joined={joinedMeetups.includes(item.id)} onJoin={() => { toggleJoined(item.id); Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success); }} />)}
+                {sortedMeetups.filter((item) => item.isLive && matches(`${item.title} ${item.location}`)).map((item) => <MeetupCard key={item.id} item={item} joined={joinedMeetups.includes(item.id)} onOpen={() => router.push(`/meetup/${item.id}`)} onJoin={() => { toggleJoined(item.id); Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success); }} />)}
               </ScrollView>
             </View>
 
             <View style={styles.section}>
               <Section title="Upcoming events" action="See all" onAction={() => notify('All upcoming events are in the Meetups tab.')} />
-              {sortedMeetups.filter((item) => !item.isLive && matches(`${item.title} ${item.location}`)).slice(0, 2).map((item) => <MeetupCard key={item.id} item={item} compact joined={joinedMeetups.includes(item.id)} onJoin={() => { toggleJoined(item.id); Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success); }} />)}
+              {sortedMeetups.filter((item) => !item.isLive && matches(`${item.title} ${item.location}`)).slice(0, 2).map((item) => <MeetupCard key={item.id} item={item} compact joined={joinedMeetups.includes(item.id)} onOpen={() => router.push(`/meetup/${item.id}`)} onJoin={() => { toggleJoined(item.id); Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success); }} />)}
             </View>
 
             <View style={styles.section}>
               <Section title="Nearby places" action="Explore" onAction={() => notify('Places rise based on interest, mood, rating, and social activity.')} />
               <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                {sortedPlaces.filter((item) => matches(`${item.name} ${item.category} ${item.tags.join(' ')}`)).map((item) => <PlaceCard key={item.id} item={item} saved={savedPlaces.includes(item.id)} onSave={() => { toggleSaved(item.id); Haptics.selectionAsync(); }} onPress={() => notify(`${item.name} · ${item.activity}`)} />)}
+                {sortedPlaces.filter((item) => matches(`${item.name} ${item.category} ${item.tags.join(' ')}`)).map((item) => <PlaceCard key={item.id} item={item} saved={savedPlaces.includes(item.id)} onSave={() => { toggleSaved(item.id); Haptics.selectionAsync(); }} onPress={() => router.push(`/place/${item.id}`)} />)}
               </ScrollView>
             </View>
 
@@ -101,6 +102,7 @@ export default function DiscoverScreen() {
 const styles = StyleSheet.create({
   screen: { flex: 1 },
   header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 20, marginBottom: 18 },
+  headerActions: { flexDirection: 'row', gap: 8 },
   eyebrow: { fontFamily: 'Inter_700Bold', fontSize: 10, letterSpacing: 1.2, marginBottom: 4 },
   search: { flexDirection: 'row', alignItems: 'center', marginHorizontal: 20, borderWidth: 1, borderRadius: 18, paddingHorizontal: 14, height: 52 },
   searchInput: { flex: 1, fontFamily: 'Inter_400Regular', fontSize: 14, marginLeft: 10 },
